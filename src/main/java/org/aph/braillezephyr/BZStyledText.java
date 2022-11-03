@@ -150,6 +150,8 @@ public class BZStyledText
 		composite.setLayout(new GridLayout(2, true));
 
 		//   load fonts
+		//loadFont("Hrvatska_brajica.otf");
+		loadFont("hrvatski4.otf");
 		loadFont("BrailleZephyr_6.otf");
 		loadFont("BrailleZephyr_6b.otf");
 		loadFont("BrailleZephyr_6s.otf");
@@ -162,7 +164,7 @@ public class BZStyledText
 		loadFont("BrailleZephyr_8wb.otf");
 		loadFont("BrailleZephyr_8ws.otf");
 		loadFont("BrailleZephyr_8wsb.otf");
-
+		
 		//   load line margin bell
 		try
 		{
@@ -1482,10 +1484,12 @@ public class BZStyledText
 
 	private final class BrailleKeyHandler implements KeyListener, VerifyKeyListener
 	{
-		private static final String ASCII_BRAILLE = " A1B'K2L@CIF/MSP\"E3H9O6R^DJG>NTQ,*5<-U8V.%[$+X!&;:4\\0Z7(_?W]#Y)=";
+		private static final String ASCII_BRAILLE = " A,B.K;L@CIF/MSP\"E:H*O!R^DJG)NTQ,Č?(-U8V.Ć[$+XŽ&;Š'\\0Z\"[_ĐW]#Y]=";
+		
 		private final boolean brailleEntry;
 
 		private char dotState, dotChar = 0x2800;
+		private int dotInt = 0x00;
 		private int prevLine;
 
 		private BrailleKeyHandler(boolean brailleEntry)
@@ -1502,36 +1506,42 @@ public class BZStyledText
 
 				dotState |= 0x01;
 				dotChar |= 0x01;
+				dotInt |= 0x01;
 				break;
 
 			case 'd':
 
 				dotState |= 0x02;
 				dotChar |= 0x02;
+				dotInt |= 0x02;
 				break;
 
 			case 's':
 
 				dotState |= 0x04;
 				dotChar |= 0x04;
+				dotInt |= 0x04;
 				break;
 
 			case 'j':
 
 				dotState |= 0x08;
 				dotChar |= 0x08;
+				dotInt |= 0x08;
 				break;
 
 			case 'k':
 
 				dotState |= 0x10;
 				dotChar |= 0x10;
+				dotInt |= 0x10;
 				break;
 
 			case 'l':
 
 				dotState |= 0x20;
 				dotChar |= 0x20;
+				dotInt |= 0x20;
 				break;
 			}
 		}
@@ -1575,13 +1585,126 @@ public class BZStyledText
 			}
 
 			//   insert resulting braille character
-			if(dotState == 0 && (dotChar & 0xff) != 0)
+			if(dotState == 0 && ((dotChar & 0xff) != 0))
 			{
+				/*
 				dotChar = ASCII_BRAILLE.charAt(dotChar & 0xff);
 				brailleText.insert(Character.toString(dotChar));
+				*/
+				// ovdje pisem dalje
+
+				if(dotInt == 0x01)
+					brailleText.insert("a");
+				else if(dotInt == 0x03)
+					brailleText.insert("b");
+				else if(dotInt == 0x05)
+					brailleText.insert("k");
+				else if(dotInt == 0x07)
+					brailleText.insert("l");
+				else if(dotInt == 0x09)
+					brailleText.insert("c");
+				else if(dotInt == 0x0A)
+					brailleText.insert("i");
+				else if(dotInt == 0x0B)
+					brailleText.insert("f");
+				else if(dotInt == 0x0D)
+					brailleText.insert("m");
+				else if(dotInt == 0x0E)
+					brailleText.insert("s");
+				else if(dotInt == 0x0F)
+					brailleText.insert("p");
+				else if(dotInt == 0x11)
+					brailleText.insert("e");
+				else if(dotInt == 0x13)
+					brailleText.insert("h");
+				else if(dotInt == 0x15)
+					brailleText.insert("o");
+				else if(dotInt == 0x17)
+					brailleText.insert("r");
+				else if(dotInt == 0x19)
+					brailleText.insert("d");
+				else if(dotInt == 0x1A)
+					brailleText.insert("j");
+				else if(dotInt == 0x1B)
+					brailleText.insert("g");
+				else if(dotInt == 0x1D)
+					brailleText.insert("n");
+				else if(dotInt == 0x1E)
+					brailleText.insert("t");
+				else if(dotInt == 0x1F)
+					brailleText.insert("q");
+				else if(dotInt == 0x21)
+					brailleText.insert("č");
+				else if(dotInt == 0x25)
+					brailleText.insert("u");
+				else if(dotInt == 0x27)
+					brailleText.insert("v");
+				else if(dotInt == 0x29)
+					brailleText.insert("ć");
+				else if(dotInt == 0x2D)
+					brailleText.insert("x");
+				else if(dotInt == 0x2E)
+					brailleText.insert("ž");
+				else if(dotInt == 0x31)
+					brailleText.insert("š");
+				else if(dotInt == 0x35)
+					brailleText.insert("z");
+				else if(dotInt == 0x39)
+					brailleText.insert("đ");
+				else if(dotInt == 0x3A)
+					brailleText.insert("w");
+				else if(dotInt == 0x3D)
+					brailleText.insert("y");
+
+				else if(dotInt == 0x02)
+					brailleText.insert(",");
+				else if(dotInt == 0x04)
+					brailleText.insert(".");
+				else if(dotInt == 0x06)
+					brailleText.insert(";");
+				else if(dotInt == 0x12)
+					brailleText.insert(":");
+				else if(dotInt == 0x14)
+					brailleText.insert("*");
+				else if(dotInt == 0x16)
+					brailleText.insert("!");
+				else if(dotInt == 0x1C)
+					brailleText.insert(")");
+				else if(dotInt == 0x22)
+					brailleText.insert("?");
+				else if(dotInt == 0x24)
+					brailleText.insert("-");
+				else if(dotInt == 0x2F)
+					brailleText.insert("&");
+				else if(dotInt == 0x36)
+					brailleText.insert("\""); //navodnici
+				else if(dotInt == 0x37)
+					brailleText.insert("[");
+				else if(dotInt == 0x3E)
+					brailleText.insert("]");
+
+				else if(dotInt == 0x3C)
+					brailleText.insert("#"); //predznak za broj
+				else if(dotInt == 0x28)
+					brailleText.insert("$"); //predznak za veliko slovo
+				else if(dotInt == 0x18)
+					brailleText.insert("£"); //predznak za više velikih slova
+				else if(dotInt == 0x34)
+					brailleText.insert("%"); //zadnji znak u %
+
+				else if(dotInt == 0x3B)
+					brailleText.insert("\u01C6"); //dž
+				else if(dotInt == 0x23)
+					brailleText.insert("\u01C9"); //lj
+				else if(dotInt == 0x2B)
+					brailleText.insert("\u01CC"); //nj
+
 				brailleText.setCaretOffset(brailleText.getCaretOffset() + 1);
 				dotChar = 0x2800;
+				dotInt = 0x00;
 			}
+
+				
 		}
 
 		@Override
