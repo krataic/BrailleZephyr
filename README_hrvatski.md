@@ -15,3 +15,5 @@ gradlew allJars
 gradlew build
 - i pokrene:
 gradlew run
+
+- Done by: Petra Šaklović and Karlo Rataić
