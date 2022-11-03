@@ -95,11 +95,11 @@ public final class BZMenu extends BZBase
 		//   file menu
 		menu = new Menu(menuBar);
 		item = new MenuItem(menuBar, SWT.CASCADE);
-		item.setText("&File");
+		item.setText("&Datoteka");
 		item.setMenu(menu);
 
-		new NewHandler().addMenuItemTo(menu, "&New");
-		new OpenHandler().addMenuItemTo(menu, "&Open\t" + mod1KeyName + "O", SWT.MOD1 | 'o');
+		new NewHandler().addMenuItemTo(menu, "&Novo");
+		new OpenHandler().addMenuItemTo(menu, "&Otvori\t" + mod1KeyName + "O", SWT.MOD1 | 'o');
 
 		if(bzSettings != null)
 		{
@@ -107,35 +107,35 @@ public final class BZMenu extends BZBase
 			ArrayList<String> recentFiles = bzSettings.getRecentFiles();
 			for(String fileName : recentFiles)
 				new OpenRecentHandler().addMenuItemTo(recentFilesMenu, fileName);
-			new BaseAction().addSubMenuItemTo(menu, "Open Recent", recentFilesMenu);
+			new BaseAction().addSubMenuItemTo(menu, "Nedavno zatvoreno", recentFilesMenu);
 		}
 
-		new SaveHandler().addMenuItemTo(menu, "&Save\t" + mod1KeyName + "S", SWT.MOD1 | 's');
-		new SaveAsHandler().addMenuItemTo(menu, "Save As\t" + mod2KeyName + mod1KeyName + "O", SWT.MOD1 | SWT.MOD2 | 's');
-		new QuitHandler().addMenuItemTo(menu, "Quit\t" + mod1KeyName + "Q", SWT.MOD1 | 'q');
+		new SaveHandler().addMenuItemTo(menu, "&Spremi\t" + mod1KeyName + "S", SWT.MOD1 | 's');
+		new SaveAsHandler().addMenuItemTo(menu, "Spremi kao\t" + mod2KeyName + mod1KeyName + "O", SWT.MOD1 | SWT.MOD2 | 's');
+		new QuitHandler().addMenuItemTo(menu, "Izlaz\t" + mod1KeyName + "Q", SWT.MOD1 | 'q');
 		new MenuItem(menu, SWT.SEPARATOR);
-		new LoadLineMarginBellHandler().addMenuItemTo(menu, "Load Line Margin Bell");
-		new LoadPageMarginBellHandler().addMenuItemTo(menu, "Load Page Margin Bell");
-		new LoadLineEndBellHandler().addMenuItemTo(menu, "Load Line End Bell");
+		new LoadLineMarginBellHandler().addMenuItemTo(menu, "Učitaj zvuk za marginu retka");
+		new LoadPageMarginBellHandler().addMenuItemTo(menu, "Učitaj zvuk za marginu stranice");
+		new LoadLineEndBellHandler().addMenuItemTo(menu, "Učitaj zvuk za kraj retka");
 
 		//   edit menu
 		menu = new Menu(menuBar);
 		item = new MenuItem(menuBar, SWT.CASCADE);
-		item.setText("&Edit");
+		item.setText("&Uredi");
 		item.setMenu(menu);
 
 		//   cut, copy, and paste accelerators are handled by StyledText.
-		new CutHandler().addMenuItemTo(menu, "Cut\t" + mod1KeyName + "X");
-		new CopyHandler().addMenuItemTo(menu, "Copy\t" + mod1KeyName + "C");
-		new PasteHandler().addMenuItemTo(menu, "Paste\t" + mod1KeyName + "V");
+		new CutHandler().addMenuItemTo(menu, "Izreži\t" + mod1KeyName + "X");
+		new CopyHandler().addMenuItemTo(menu, "Kopiraj\t" + mod1KeyName + "C");
+		new PasteHandler().addMenuItemTo(menu, "Zalijepi\t" + mod1KeyName + "V");
 		new MenuItem(menu, SWT.SEPARATOR);
-		new UndoHandler().addMenuItemTo(menu, "Undo\t" + mod1KeyName + "Z", SWT.MOD1 | 'z');
-		new RedoHandler().addMenuItemTo(menu, "Redo\t" + mod2KeyName + mod1KeyName + "Z", SWT.MOD1 | SWT.MOD2 | 'z');
+		new UndoHandler().addMenuItemTo(menu, "Unatrag\t" + mod1KeyName + "Z", SWT.MOD1 | 'z');
+		new RedoHandler().addMenuItemTo(menu, "Unaprijed\t" + mod2KeyName + mod1KeyName + "Z", SWT.MOD1 | SWT.MOD2 | 'z');
 
 		//   view menu
 		menu = new Menu(menuBar);
 		item = new MenuItem(menuBar, SWT.CASCADE);
-		item.setText("&View");
+		item.setText("&Pregled");
 		item.setMenu(menu);
 
 		new VisibleHandler(menu);
@@ -145,24 +145,24 @@ public final class BZMenu extends BZBase
 		//   format menu
 		menu = new Menu(menuBar);
 		item = new MenuItem(menuBar, SWT.CASCADE);
-		item.setText("F&ormat");
+		item.setText("&Prikaz");
 		item.setMenu(menu);
 
-		new LinesPerPageHandler(parentShell).addMenuItemTo(menu, "Lines Per Page");
-		new CharsPerLineHandler(parentShell).addMenuItemTo(menu, "Chars Per Line");
-		new LineMarginBellHandler(parentShell).addMenuItemTo(menu, "Line Margin Bell", bzStyledText.getLineMarginBell() != -1);
-		new PageMarginBellHandler(parentShell).addMenuItemTo(menu, "Page Margin Bell", bzStyledText.getPageMarginBell() != -1);
-		new RewrapFromCursorHandler().addMenuItemTo(menu, "Rewrap From Cursor\t" + mod1KeyName + "F", SWT.MOD1 | 'F');
+		new LinesPerPageHandler(parentShell).addMenuItemTo(menu, "Broj redaka po stranici");
+		new CharsPerLineHandler(parentShell).addMenuItemTo(menu, "Broj znakova po retku");
+		new LineMarginBellHandler(parentShell).addMenuItemTo(menu, "Zvuk margine retka", bzStyledText.getLineMarginBell() != -1);
+		new PageMarginBellHandler(parentShell).addMenuItemTo(menu, "Zvuk margine stranice", bzStyledText.getPageMarginBell() != -1);
+		new RewrapFromCursorHandler().addMenuItemTo(menu, "Ograniči kursor oko pokazivača\t" + mod1KeyName + "F", SWT.MOD1 | 'F');
 
 		//   help menu
 		menu = new Menu(menuBar);
 		item = new MenuItem(menuBar, SWT.CASCADE);
-		item.setText("&Help");
+		item.setText("&Pomoć");
 		item.setMenu(menu);
 
-		new AboutHandler(parentShell).addMenuItemTo(menu, "About");
+		new AboutHandler(parentShell).addMenuItemTo(menu, "O programu");
 		//TODO:  hide on non-development version
-		new LogViewerHandler(parentShell).addMenuItemTo(menu, "View Log");
+		new LogViewerHandler(parentShell).addMenuItemTo(menu, "Pregledaj povijest poruka");
 	}
 
 	/**
@@ -282,19 +282,19 @@ public final class BZMenu extends BZBase
 			}
 			catch(FileNotFoundException exception)
 			{
-				logError("Unable to open file", exception);
+				logError("Nije moguće otvoriti datoteku.", exception);
 			}
 			catch(IOException exception)
 			{
-				logError("Unable to read file", exception);
+				logError("Nije moguće pročitati datoteku.", exception);
 			}
 			catch(UnsupportedAudioFileException ignore)
 			{
-				logError("Sound file unsupported for line margin bell", fileName);
+				logError("Zvučna datoteka za zvuk margine retka nije podržana.", fileName);
 			}
 			catch(LineUnavailableException ignore)
 			{
-				logError("Line unavailable for line margin bell", fileName);
+				logError("Redak nije dostupan za zvuk margine retka.", fileName);
 			}
 		}
 	}
@@ -315,19 +315,19 @@ public final class BZMenu extends BZBase
 			}
 			catch(FileNotFoundException exception)
 			{
-				logError("Unable to open file", exception);
+				logError("Nije moguće otvoriti datoteku.", exception);
 			}
 			catch(IOException exception)
 			{
-				logError("Unable to read file", exception);
+				logError("Nije moguće pročitati datoteku.", exception);
 			}
 			catch(UnsupportedAudioFileException ignore)
 			{
-				logError("Sound file unsupported for page margin bell", fileName);
+				logError("Zvučna datoteka za zvuk margine stranice nije podržana.", fileName);
 			}
 			catch(LineUnavailableException ignore)
 			{
-				logError("Line unavailable for page margin bell", fileName);
+				logError("Redak nije dostupan za zvuk margine stranice.", fileName);
 			}
 		}
 	}
@@ -348,19 +348,19 @@ public final class BZMenu extends BZBase
 			}
 			catch(FileNotFoundException exception)
 			{
-				logError("Unable to open file", exception);
+				logError("Nije moguće otvoriti datoteku.", exception);
 			}
 			catch(IOException exception)
 			{
-				logError("Unable to read file", exception);
+				logError("Nije moguće pročitati datoteku.", exception);
 			}
 			catch(UnsupportedAudioFileException ignore)
 			{
-				logError("Sound file unsupported for page margin bell", fileName);
+				logError("Zvučna datoteka za zvuk margine stranice nije podržana.", fileName);
 			}
 			catch(LineUnavailableException ignore)
 			{
-				logError("Line unavailable for line end bell", fileName);
+				logError("Redak nije dostupan za zvuk kraja retka.", fileName);
 			}
 		}
 	}
@@ -419,16 +419,16 @@ public final class BZMenu extends BZBase
 		{
 			brailleItem = new MenuItem(menu, SWT.PUSH);
 			if(bzStyledText.getBrailleVisible())
-				brailleItem.setText("Hide Braille");
+				brailleItem.setText("Sakrij Braille");
 			else
-				brailleItem.setText("Show Braille");
+				brailleItem.setText("Prikaži Braille");
 			brailleItem.addSelectionListener(this);
 
 			asciiItem = new MenuItem(menu, SWT.PUSH);
 			if(bzStyledText.getAsciiVisible())
-				asciiItem.setText("Hide ASCII");
+				asciiItem.setText("Sakrij ASCII");
 			else
-				asciiItem.setText("Show ASCII");
+				asciiItem.setText("Prikaži ASCII");
 			asciiItem.addSelectionListener(this);
 		}
 
@@ -440,7 +440,7 @@ public final class BZMenu extends BZBase
 				if(bzStyledText.getBrailleVisible())
 				{
 					bzStyledText.setBrailleVisible(false);
-					brailleItem.setText("Show Braille");
+					brailleItem.setText("Prikaži Braille");
 //					if(!bzStyledText.getAsciiVisible())
 //					{
 //						bzStyledText.setAsciiVisible(true);
@@ -450,7 +450,7 @@ public final class BZMenu extends BZBase
 				else
 				{
 					bzStyledText.setBrailleVisible(true);
-					brailleItem.setText("Hide Braille");
+					brailleItem.setText("Sakrij Braille");
 				}
 			}
 			else
@@ -458,7 +458,7 @@ public final class BZMenu extends BZBase
 				if(bzStyledText.getAsciiVisible())
 				{
 					bzStyledText.setAsciiVisible(false);
-					asciiItem.setText("Show ASCII");
+					asciiItem.setText("Prikaži ASCII");
 //					if(!bzStyledText.getBrailleVisible())
 //					{
 //						bzStyledText.setBrailleVisible(true);
@@ -468,7 +468,7 @@ public final class BZMenu extends BZBase
 				else
 				{
 					bzStyledText.setAsciiVisible(true);
-					asciiItem.setText("Hide ASCII");
+					asciiItem.setText("Sakrij ASCII");
 				}
 			}
 		}
@@ -528,7 +528,7 @@ public final class BZMenu extends BZBase
 		private LinesPerPageDialog(Shell parentShell)
 		{
 			shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-			shell.setText("Lines per Page");
+			shell.setText("Broj redaka po stranici");
 			shell.setLayout(new GridLayout(3, true));
 
 			spinner = new Spinner(shell, 0);
@@ -542,7 +542,7 @@ public final class BZMenu extends BZBase
 			okButton.addSelectionListener(this);
 
 			cancelButton = new Button(shell, SWT.PUSH);
-			cancelButton.setText("Cancel");
+			cancelButton.setText("Odustani");
 			cancelButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 			cancelButton.addSelectionListener(this);
 
@@ -607,7 +607,7 @@ public final class BZMenu extends BZBase
 		private CharsPerLineDialog(Shell parentShell)
 		{
 			shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-			shell.setText("Characters Per Line");
+			shell.setText("Broj znakova po retku");
 			shell.setLayout(new GridLayout(3, true));
 
 			spinner = new Spinner(shell, 0);
@@ -621,7 +621,7 @@ public final class BZMenu extends BZBase
 			okButton.addSelectionListener(this);
 
 			cancelButton = new Button(shell, SWT.PUSH);
-			cancelButton.setText("Cancel");
+			cancelButton.setText("Odustani");
 			cancelButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 			cancelButton.addSelectionListener(this);
 
@@ -687,7 +687,7 @@ public final class BZMenu extends BZBase
 		private LineMarginBellDialog(Shell parentShell)
 		{
 			shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-			shell.setText("Bell Margin");
+			shell.setText("Zvuk margine");
 			shell.setLayout(new GridLayout(3, true));
 
 			spinner = new Spinner(shell, 0);
@@ -701,7 +701,7 @@ public final class BZMenu extends BZBase
 			okButton.addSelectionListener(this);
 
 			cancelButton = new Button(shell, SWT.PUSH);
-			cancelButton.setText("Cancel");
+			cancelButton.setText("Odustani");
 			cancelButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 			cancelButton.addSelectionListener(this);
 
@@ -765,7 +765,7 @@ public final class BZMenu extends BZBase
 		private PageMarginBellDialog(Shell parentShell)
 		{
 			shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-			shell.setText("Bell Page");
+			shell.setText("Zvuk stranice");
 			shell.setLayout(new GridLayout(3, true));
 
 			spinner = new Spinner(shell, 0);
@@ -779,7 +779,7 @@ public final class BZMenu extends BZBase
 			okButton.addSelectionListener(this);
 
 			cancelButton = new Button(shell, SWT.PUSH);
-			cancelButton.setText("Cancel");
+			cancelButton.setText("Odustani");
 			cancelButton.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
 			cancelButton.addSelectionListener(this);
 
@@ -848,7 +848,7 @@ public final class BZMenu extends BZBase
 		{
 			Shell dialog = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.PRIMARY_MODAL);
 			dialog.setLayout(new GridLayout(1, true));
-			dialog.setText("About BrailleZephyr");
+			dialog.setText("O BrailleZephyr-u");
 
 			String versionString = bzStyledText.getVersionString();
 			if(versionString == null)
@@ -912,7 +912,7 @@ public final class BZMenu extends BZBase
 
 			Shell dialog = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.PRIMARY_MODAL);
 			dialog.setLayout(new FillLayout());
-			dialog.setText("Log Messages");
+			dialog.setText("Prethodne poruke");
 
 			Text text = new Text(dialog, SWT.READ_ONLY | SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 			text.setText(bzStyledText.getLogString());
