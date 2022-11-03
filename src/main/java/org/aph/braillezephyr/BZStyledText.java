@@ -242,7 +242,7 @@ public class BZStyledText
 
 		brailleText = new StyledText(composite, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		brailleText.setLayoutData(new GridData(GridData.FILL_BOTH));
-		brailleText.setFont(new Font(parentShell.getDisplay(), "BrailleZephyr_6s", 18, SWT.NORMAL));
+		brailleText.setFont(new Font(parentShell.getDisplay(), "BrailleZephyr_6", 18, SWT.NORMAL));
 		brailleText.addFocusListener(new FocusHandler(brailleText));
 		brailleText.addPaintListener(new PaintHandler(brailleText));
 		BrailleKeyHandler brailleKeyHandler = new BrailleKeyHandler(true);
