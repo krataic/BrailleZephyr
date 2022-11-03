@@ -11,6 +11,7 @@
 
 ## Kratke upute
 - Kako bi se koristilo hrvatsko znakovlje potrebno je ici u Pregled/Braille font i odabrati "BrailleZephyr_6" font.
+- UPDATE: S novom verzijom vise nije potreban ovaj korak
 - Najjednostavnije je pokrenuti program tako da se otvori Command Line, smjesti se u pocetni direktorij projekta i pozove se naredba:
 gradlew allJars
 - Zatim se builda pozivom:
